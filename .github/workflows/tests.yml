@@ -1,0 +1,43 @@
+name: Tests
+
+# see: https://help.github.com/en/actions/reference/events-that-trigger-workflows
+on:  # Trigger the workflow on push or pull request, but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  unitests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.13cd
+      - name: Install dependencies
+        run: |
+          pip install -e '.[tests]' -c constraints.txt
+        shell: bash
+      - name: Run tests
+        run: |
+          sudo Xvfb :99 -ac & export DISPLAY=:99
+          coverage run --source=template_filler --omit=template_filler/__about__.py -m pytest --junitxml=report.xml tests -v
+      - name: Upload pytest results
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: report.xml
+        if: failure()
+      - name: Coverage statistics
+        if: success()
+        run: |
+          coverage xml
+          coverage report
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          name: codecov-umbrella
+          fail_ci_if_error: false

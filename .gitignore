@@ -1,0 +1,8 @@
+build
+dist
+.mypy_cache
+.ruff_cache
+__pycache__
+*.egg-info/
+.coverage
+.DS_Store

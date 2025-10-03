@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools==75.1.0"]
+build-backend = "setuptools.build_meta"
+
+# Per-service tests in CI, local py.test and local docker-compose
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--showlocals -rxs -v --strict-markers"
+markers = [
+    "unit: Fast unit and math algorithm tests",
+    "component: Component tests (require a real infrastructure)",
+]
+norecursedirs = ".git __pycache__ .pyc .* config data docs extras notebooks"
+
+[tool.uv.pip]
+link-mode = "copy"
+
+[project]
+# Core packaging metadata, useful for picking the right version of the AST parser
+# See https://packaging.python.org/en/latest/specifications/core-metadata/#requires-python
+requires-python = "~=3.13.0"
+name = "template-filler"
+readme = "README.md"
+dynamic = ["version"]
+license = {text = "proprietary"}
+dependencies = [
+    "python-docx",
+    "openpyxl"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "uv",
+    "pyinstaller",
+    "types-openpyxl",
+]
+tests = [
+    "pytest",
+    "pytest-cov"
+]
+
+[project.urls]
+Repository = "https://github.com/stancld/template-filler-v2"
+
+[tool.setuptools]
+packages = ["template_filler"]
+
+[tool.setuptools.dynamic]
+version = {attr = "template_filler.__about__.VERSION"}
