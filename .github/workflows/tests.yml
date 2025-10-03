@@ -17,7 +17,7 @@ jobs:
           python-version: 3.13
       - name: Install dependencies
         run: |
-          pip install -e '.[tests]' -c constraints.txt
+          pip install -e '.[tests]'
         shell: bash
       - name: Run tests
         run: |
