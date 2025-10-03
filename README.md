@@ -1,6 +1,8 @@
 # Template Filler
 
-A modern web application for filling Word document templates with data from Excel or CSV files.
+A minimalistic web application for filling Word document templates with data from Excel or CSV files.
+
+<img src="app.png" alt="Template Filler App" width="800">
 
 ## Features
 
