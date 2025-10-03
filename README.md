@@ -61,6 +61,43 @@ npm run dev
 
 The web interface will be available at `http://localhost:5173`.
 
+### Share Your App with Others Over the Internet
+
+To make your locally running app accessible to others over the internet:
+
+1. **Start your app locally** (both backend and frontend as described above)
+
+2. **Install localtunnel** (if not already installed):
+   ```bash
+   npm install -g localtunnel
+   ```
+
+3. **Expose your frontend** via localtunnel:
+   ```bash
+   npx localtunnel --port 5173
+   ```
+
+4. **Share the URL** that appears (e.g., `https://your-subdomain.loca.lt`)
+
+**Note**:
+- First-time visitors will see a localtunnel warning page - they just need to click "Continue"
+- The tunnel URL changes each time you restart localtunnel
+- This is safe for development/sharing with friends, but not for production use
+- Only run the tunnel when needed and stop it when done
+
+**Alternative: ngrok** (requires free account):
+```bash
+# Install
+brew install ngrok
+
+# Sign up at https://dashboard.ngrok.com/signup
+# Add your authtoken
+ngrok config add-authtoken YOUR_TOKEN
+
+# Start tunnel
+ngrok http 5173 --basic-auth "username:password"
+```
+
 ### Using the Application
 
 1. Open `http://localhost:5173` in your browser
