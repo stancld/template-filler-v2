@@ -25,7 +25,10 @@ dynamic = ["version"]
 license = {text = "proprietary"}
 dependencies = [
     "python-docx",
-    "openpyxl"
+    "openpyxl",
+    "fastapi",
+    "uvicorn",
+    "python-multipart"
 ]
 
 [project.optional-dependencies]

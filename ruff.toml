@@ -69,7 +69,7 @@ lint.ignore = [
 ]
 
 line-length = 119
-target-version = "py313"
+target-version = "py312"
 extend-exclude = [
     ".git",
     ".mypy_cache",
